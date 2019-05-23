@@ -28,18 +28,29 @@ public class MMM {
 	public static void main(String[] args) throws IOException {
 
 		// 匹配手机型号关键字(Build/)
-//		Pattern pattern = Pattern.compile(";\\s?(\\S*?\\s?\\S*?)\\s?(Build)/");
+//		Pattern pattern = Pattern.compile(";\\s?(\\S*?)\\s?(Build)/");
 		// 匹配网络信号 关键字(NetType/)
-		Pattern pattern2 = Pattern.compile("\\s?NetType/(\\S*)");
-		FileReader fr=new FileReader("E:/Test/11111.txt");
+		// 发现请求中有NetType/WIFI"【少见，也不晓得是否是正常】,还有NetType/WIFI La..【常见，应该是正常数据】
+		Pattern pattern2 = Pattern.compile("\\s?NetType/(\\S*)[\", ' ']");
+		FileReader fr=new FileReader("E:/Test/ua.txt");
         BufferedReader br=new BufferedReader(fr);
         String line="";
         while ((line=br.readLine())!=null) {
         	Matcher matcher = pattern2.matcher(line); 
             String model = null; 
             if (matcher.find()) { 
-                model = matcher.group(1).trim(); 
-                System.out.println("ͨ��userAgent���������ͣ�" + model);; 
+            	model = matcher.group(1);
+//            	model = matcher.group(1).split("\"")[0].trim();
+            	if(model.length()>4 && model.length()<8 &&  !"NON_NETWORK".equals(model)) {
+            		model = model.split("\"")[0].trim();
+            		System.out.println("这个长度大于4的请求的手机型号是：" + model);;
+            	}
+            	else if(model.length()<=2 && !"4G".equals(model) && model.length()>0){
+//            		System.out.println("这个长度小于=4的请求的手机型号是：" + model);;
+            	}
+            		
+            		
+                 
             }
         }
 		

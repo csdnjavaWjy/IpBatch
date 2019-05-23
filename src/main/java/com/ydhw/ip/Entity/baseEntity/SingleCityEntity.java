@@ -39,7 +39,7 @@ public class SingleCityEntity {
 	 * 	该地区是什么级别的城市 1 一线 2 新一线 3 二线 4 三线 5 四线 6 五线
 	 */
 	@ExcelCell(index = 4)
-	private int cityType;
+	private int cityCode;
 	
 
 
