@@ -41,6 +41,12 @@ public class SingleCityEntity {
 	@ExcelCell(index = 4)
 	private int cityCode;
 	
+	/**
+	 * 城市对应的省份
+	 */
+	@ExcelCell(index=5)
+	private String provinceName;
+	
 
 
 }
